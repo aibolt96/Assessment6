@@ -15,4 +15,24 @@ describe("Duel Duo tests", () => {
     await driver.get("http://localhost:8000");
     await driver.wait(until.titleIs("Duel Duo"), 1000);
   });
+
+  test("Draw button works", async () => {
+    await driver.get("http://localhost:8000");
+    await driver.findElement(By.id("draw")).click()
+    let text = await driver.findElement(By.id("choose-header")).getText()
+    expect(text).toBe("Choose 2!")
+  });
+
+  test("Play again button works", async () => {
+    await driver.get("http://localhost:8000");
+    await driver.findElement(By.id("draw")).click()
+    await driver.findElement(By.className("bot-btn")).click()
+    await driver.findElement(By.className("bot-btn")).click()
+    await driver.findElement(By.id("duel")).click()
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    await driver.findElement(By.id("play-again")).click()
+    let text = await driver.findElement(By.id("choose-header")).getText()
+    expect(text).toBe("Choose 2!")
+    
+  })
 });
