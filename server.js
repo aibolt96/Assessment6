@@ -2,6 +2,16 @@ const express = require("express");
 const bots = require("./src/botsData");
 const shuffle = require("./src/shuffle");
 
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: 'aad7474e7e4c4104a57793c81b50b95d',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
+
+// record a generic message and send it to Rollbar
+rollbar.log('Hello world!')
+
 const playerRecord = {
   wins: 0,
   losses: 0,
